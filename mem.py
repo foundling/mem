@@ -13,9 +13,12 @@ def cli():
     pass
 
 @cli.command()
-@click.argument('task_name')
-def add(task_name):
-    click.echo('Adding task %s' % task_name)
+@click.argument('name')
+@click.argument('description', default='')
+@click.argument('created', default='')
+@click.argument('complete', default='')
+def add(name, description, created, complete):
+    click.echo('Adding task %s' % name)
 
 
 
