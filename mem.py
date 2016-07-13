@@ -10,8 +10,13 @@ db = Database(config['DB_PATH'])
 
 @click.version_option(1.0)
 
+# f :: tasks -> string 
 def format(tasks):
-    return '\n'.join(map(str,tasks))
+    for task in tasks:
+        print 'NAME: ', task[1]
+        print 'DESCRIPTION:', task[2]
+        print ''
+
 
 @click.group()
 def cli():
@@ -31,7 +36,6 @@ def add(name, description):
 
 @cli.command()
 def all():
-
 
     formatted = format(db.get_all_tasks())
     click.echo(formatted)
