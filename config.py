@@ -1,0 +1,5 @@
+config = {
+
+    'db': 'mem.db'
+
+}
