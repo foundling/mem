@@ -12,6 +12,7 @@ db = Database(config['DB_PATH'])
 
 # f :: tasks -> string 
 def format(tasks):
+    print ''
     for task in tasks:
         print 'NAME: ', task[1]
         print 'DESCRIPTION:', task[2]
