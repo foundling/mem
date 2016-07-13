@@ -1,14 +1,14 @@
 from setuptools import setup
 
 setup(
-    name="Memt",
+    name="Mem",
     version="1.0",
-    py_modules=['memt'],
+    py_modules=['mem'],
     install_requires=[
-        'Memt',
+        'Mem',
     ],
     entry_points='''
         [console_scripts]
-        memt=memt:cli
+        mem=mem:cli
     '''
 )

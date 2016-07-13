@@ -15,7 +15,7 @@ def cli():
 @cli.command()
 @click.argument('task_name')
 def add(task_name):
-    click.echo('adding task %s' % task_name)
+    click.echo('Adding task %s' % task_name)
 
 
 
