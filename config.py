@@ -1,5 +1,5 @@
 config = {
 
-    'db': 'mem.db'
+    'DB_PATH': 'mem.db'
 
 }

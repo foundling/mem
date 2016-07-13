@@ -2,16 +2,18 @@
 
 import click
 import sqlite3
+
 from config import config
+from db import Database
 
-DB_PATH = config['db']
-db = sqlite3.connect(DB_PATH)
-
+db = Database(config['DB_PATH'])
 
 @click.version_option(1.0)
+
 @click.group()
 def cli():
     pass
+
 
 @cli.command()
 @click.argument('name')
@@ -21,7 +23,12 @@ def cli():
 def add(name, description, created, complete):
     click.echo('Adding task %s' % name)
 
+@cli.command()
+def all():
+    click.echo(db.get_all_tasks())
 
+cli.add_command(add)
+cli.add_command(all)
 
 if __name__ == '__main__':
     cli()
