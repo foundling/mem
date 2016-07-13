@@ -2,9 +2,9 @@ drop table if exists tasks;
 
 create table 
 tasks(
-    id          INTEGER PRIMARY KEY AUTOINCREMENT, 
+    id          INTEGER PRIMARY KEY, 
     name        TEXT, 
-    details     TEXT, 
+    description TEXT, 
     created     TEXT, 
     complete    INTEGER
 );

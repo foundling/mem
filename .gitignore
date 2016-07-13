@@ -2,4 +2,5 @@ env
 mem.db
 Mem.egg-info
 clean
+*/**/*.sw[op]
 *.pyc

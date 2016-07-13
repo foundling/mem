@@ -1,4 +1,5 @@
 import sqlite3
+import datetime
 from config import config
 
 class Database(object):
@@ -11,3 +12,10 @@ class Database(object):
         rows = self.con.execute('select * from tasks') 
         return [row for row in rows]
 
+    def add_task(self, name, desc):
+
+        created = str(datetime.date.today())
+        insert_list = (name, desc, created, 0 ) # text, text, datetime string, 0 for False
+
+        self.con.execute("insert into tasks values(Null,?,?,?,?)", insert_list)
+        self.con.commit()

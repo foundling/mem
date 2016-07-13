@@ -10,22 +10,31 @@ db = Database(config['DB_PATH'])
 
 @click.version_option(1.0)
 
+def format(tasks):
+    return '\n'.join(map(str,tasks))
+
 @click.group()
 def cli():
     pass
 
+@cli.command(short_help='short help')
+@click.argument('name', type=click.STRING)
+@click.argument('description', type=click.STRING)
+def add(name, description):
 
-@cli.command()
-@click.argument('name')
-@click.argument('description', default='', type=click.STRING)
-@click.argument('created', default='now', type=click.STRING)
-@click.argument('complete', default=0, type=click.INT)
-def add(name, description, created, complete):
-    click.echo('Adding task %s' % name)
+    task_properties = [ 
+        name,
+        description,
+    ]
+    db.add_task( *task_properties )
+
 
 @cli.command()
 def all():
-    click.echo(db.get_all_tasks())
+
+
+    formatted = format(db.get_all_tasks())
+    click.echo(formatted)
 
 cli.add_command(add)
 cli.add_command(all)
