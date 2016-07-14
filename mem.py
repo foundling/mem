@@ -29,7 +29,7 @@ def cli():
 def add(name, description):
 
     if not name or not description:
-        name = click.prompt('name', type=str, default=(name or ''))
+        name = click.prompt('name', type=str, default=name)
         description = click.prompt('description', type=str)
         click.echo('saved new task \n%s\n%s ' % (name, description))
 
