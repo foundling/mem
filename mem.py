@@ -24,15 +24,21 @@ def cli():
     pass
 
 @cli.command(short_help='short help')
-@click.argument('name', type=click.STRING)
-@click.argument('description', type=click.STRING)
+@click.argument('name', type=click.STRING, required=False)
+@click.argument('description', type=click.STRING, required=False)
 def add(name, description):
 
-    task_properties = [ 
-        name,
-        description,
-    ]
-    db.add_task( *task_properties )
+    if not name or not description:
+        name = click.prompt('name', type=str, default=(name or ''))
+        description = click.prompt('description', type=str)
+        click.echo('saved new task \n%s\n%s ' % (name, description))
+
+    else:
+        task_properties = [ 
+            name,
+            description,
+        ]
+        db.add_task(*task_properties)
 
 
 @cli.command()
@@ -43,6 +49,8 @@ def all():
 
 cli.add_command(add)
 cli.add_command(all)
+
+
 
 if __name__ == '__main__':
     cli()
