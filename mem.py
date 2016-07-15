@@ -35,16 +35,18 @@ def add(name, description):
         click.prompt('name', type=str, default=name),\
         click.prompt('description', type=str)
     ]
-    print task_properties
     db.add_task(*task_properties)
 
 
 @cli.command()
 def all():
-    ''' get all the tasks from the database '''
+    ''' get all the tasks from the database or print no tasks'''
 
-    formatted = format(db.get_all_tasks())
-    click.echo(formatted)
+    tasks = db.get_all_tasks()
+    if not tasks: 
+        print('no tasks ...')
+        return
+    click.echo( format(tasks) )
 
 @cli.command('deletedb')
 def delete_db():

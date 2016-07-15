@@ -21,6 +21,7 @@ class Database(object):
         
         self.DB_PATH = db_path 
         self.con = sqlite3.connect(self.DB_PATH)
+        self.con.executescript(open('schema.sqlite3').read())
 
     def get_all_tasks(self):
         ''' get all the tasks from the task database '''
