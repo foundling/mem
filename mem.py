@@ -8,44 +8,49 @@ from db import Database
 
 db = Database(config['DB_PATH'])
 
-@click.version_option(1.0)
-
-# f :: tasks -> string 
 def format(tasks):
     print ''
     for task in tasks:
-        print 'NAME: ', task[1]
-        print 'DESCRIPTION:', task[2]
+        print 'Name: ', task[1]
+        print 'Description:', task[2]
         print ''
 
-
+@click.version_option(1.0)
 @click.group()
 def cli():
     pass
 
-@cli.command(short_help='short help')
+@cli.command(short_help='add a name or description in-line, entirely optional')
 @click.argument('name', type=click.STRING, required=False)
 @click.argument('description', type=click.STRING, required=False)
 def add(name, description):
 
-    if not name or not description:
-        name = click.prompt('name', type=str, default=name)
-        description = click.prompt('description', type=str)
-        click.echo('saved new task \n%s\n%s ' % (name, description))
+    ''' 
+    add a task to the task database.
+    mem add [TASK_NAME] [TASK_DESCRIPTION] 
+    ''' 
 
-    else:
-        task_properties = [ 
-            name,
-            description,
-        ]
-        db.add_task(*task_properties)
+    both = name and description
+    task_properties = both or [
+        click.prompt('name', type=str, default=name),\
+        click.prompt('description', type=str)
+    ]
+    print task_properties
+    db.add_task(*task_properties)
 
 
 @cli.command()
 def all():
+    ''' get all the tasks from the database '''
 
     formatted = format(db.get_all_tasks())
     click.echo(formatted)
+
+@cli.command('deletedb')
+def delete_db():
+    ''' delete the database '''
+    db.delete_db()
+     
 
 cli.add_command(add)
 cli.add_command(all)
@@ -53,4 +58,5 @@ cli.add_command(all)
 
 
 if __name__ == '__main__':
+
     cli()
