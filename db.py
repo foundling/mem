@@ -10,7 +10,7 @@ def log(msg):
     def outer(func):
         def inner(*args, **kwargs):
             func(*args, **kwargs)        
-            print msg
+            print(msg)
         return inner
     return outer
 

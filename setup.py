@@ -1,11 +1,11 @@
 from setuptools import setup
 
 setup(
-    name="Mem",
+    name="mem",
     version="1.0",
     py_modules=['mem'],
     install_requires=[
-        'Mem',
+        'mem',
     ],
     entry_points='''
         [console_scripts]

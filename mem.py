@@ -9,11 +9,10 @@ from db import Database
 db = Database(config['DB_PATH'])
 
 def format(tasks):
-    print ''
+    print('')
     for task in tasks:
-        print 'Name: ', task[1]
-        print 'Description:', task[2]
-        print ''
+        print('Name: ', task[1])
+        print('Description:', task[2])
 
 @click.version_option(1.0)
 @click.group()
@@ -30,11 +29,10 @@ def add(name, description):
     mem add [TASK_NAME] [TASK_DESCRIPTION] 
     ''' 
 
-    both = name and description
-    task_properties = both or [
-        click.prompt('name', type=str, default=name),\
-        click.prompt('description', type=str)
-    ]
+    task_properties = [name, description] if (name and description) else [ 
+            click.prompt('name', type=str, default=name),
+            click.prompt('description', type=str)
+        ]
     db.add_task(*task_properties)
 
 
@@ -56,8 +54,6 @@ def delete_db():
 
 cli.add_command(add)
 cli.add_command(all)
-
-
 
 if __name__ == '__main__':
 
