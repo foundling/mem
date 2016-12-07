@@ -6,4 +6,3 @@ Mem.egg-info
 clean
 */**/*.sw[op]
 *.pyc
-todo.txt
