@@ -1,19 +1,4 @@
-/*
-
-    api:
-
-        list    // lists items for this dir
-        list -g // lists all lists
-        add     // adds note to current dirs notes. if no list, it creates it and prompts for a list name.
-        nix     // removes dir 
-
-    data structure:
-
-        list of objects for each list 
-
-*/
-
-
+const commander = require('commander');
 const app = module.exports = exports = {
 
     currentDirectory: getCwd(),
@@ -24,17 +9,6 @@ const app = module.exports = exports = {
     addTask
 
 };
-
-const getCwd = () => {
-    return process.cwd;
-}
-
-const getList = () => {
-    // this will determine appropriate list if dir doesn't match existing lists
-    return getCwd();
-};
-
-const commander = require('commander');
 
 commander
     .command('list')
@@ -48,19 +22,29 @@ commander
 
 commander.parse(process.argv);
 
-const listAll = (options) => {
+function getCwd() {
+    return process.cwd;
+}
+
+function getList() {
+    // this will determine appropriate list if dir doesn't match existing lists
+    return getCwd();
+};
+
+
+function listAll(options) {
     if (options.global) {
         listAllLists(app.lists);
     } else {
-        listAllTasks(getList())
+        listAllTasks(app.lists)
     }
 };
 
-const listAllTasks = (list) => {
-    list.tasks.forEach(task => console.log(task.title)); 
+function listAllTasks(list) {
+    list[0].tasks.forEach(task => console.log(task.title)); 
 }
 
-const listAllLists = (lists) => {
+function listAllLists(lists) {
     lists.forEach(list => console.log(list.listName));
 }
 
