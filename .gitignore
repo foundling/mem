@@ -1,3 +1,14 @@
+<<<<<<< HEAD
 node_modules
 .swo
 .swp
+=======
+bin
+click
+env
+mem.db
+Mem.egg-info
+clean
+*/**/*.sw[op]
+*.pyc
+>>>>>>> 3b0e6d9eefa2f1ae916a4b8bfc59d700e8f3cd25

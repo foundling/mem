@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm ./mem.db 
+touch mem.db
+sqlite3 mem.db < schema.sqlite3
